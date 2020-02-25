@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-//import Header from 'components/Layout/Header';
+import Header from 'components/Layout/Header';
 //import Footer from 'components/Layout/Footer';
 
 class Layout extends Component {
@@ -30,6 +30,7 @@ class Layout extends Component {
   render() {
     return (
       <React.Fragment>
+        <Header />
         {this.props.children}
       </React.Fragment>
     );

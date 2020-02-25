@@ -19,3 +19,8 @@
   align-items: center;
   justify-content: center;
 }
+
+.is-gradient {
+  background-image: linear-gradient(to right, $blue 0%, #05F7F7 130%);
+  color:white;
+}

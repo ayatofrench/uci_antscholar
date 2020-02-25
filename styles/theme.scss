@@ -6,8 +6,9 @@
 @import '~bulma/sass/utilities/initial-variables';
 
 // 2. Override styles - https://bulma.io/documentation/customize/variables/
-// $primary: red;
-// $fullhd: 2000px;
+$blue: #0A57E6;
+
+$primary: $blue;
 
 // 3. Bulma enable Modularity, which allow you to import what you need
 // https://bulma.io/documentation/overview/modular/
