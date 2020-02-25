@@ -57,6 +57,14 @@ class Form extends Component {
         <div class="container">
           {this.showStep()}
         </div>
+        {this.state.step > 1 &&
+          <button class="button" onClick={this.prevStep}>
+            Back
+          </button>
+        }
+        <button class="button" onClick={this.nextStep}>
+          Next
+        </button>
       </section>
     )}
 }
