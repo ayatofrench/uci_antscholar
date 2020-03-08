@@ -6396,8 +6396,8 @@ a.list-item {
 
 .navbar {
   background-color: #fff;
-  padding: 0.5rem 0 0 0;
-  position: relative;
+  padding: 0.5rem;
+  box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
   z-index: 30;
 }
 
@@ -6409,6 +6409,7 @@ a.list-item {
 .navbar.is-white .navbar-brand > .navbar-item,
 .navbar.is-white .navbar-brand .navbar-link {
   color: #0a0a0a;
+  text-align: center;
 }
 
 .navbar.is-white .navbar-brand > a.navbar-item:focus, .navbar.is-white .navbar-brand > a.navbar-item:hover, .navbar.is-white .navbar-brand > a.navbar-item.is-active,
