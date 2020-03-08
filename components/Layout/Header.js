@@ -9,8 +9,8 @@ class Header extends Component {
         <React.Fragment>
             <nav class="navbar" role="navigation" aria-label="main navigatoin" style={{padding:40}}>
                 <div class="navbar-brand">
-                    <a class="navbar-item" href="https://bulma.io">
-                        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
+                    <a class="navbar-item" href="/">
+                        <img src="/images/PAJAMA PARTY.png"  />
                     </a>
                 </div>
                 

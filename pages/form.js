@@ -1,9 +1,16 @@
 
 import React, { Component } from 'react';
-import Contact from "../components/Form/contact.js"
+import firebase from "firebase/app";
+import 'firebase/database'
+//import Contact from "../components/Form/contact.js"
+import initFirebase from '../utils/firebaseInit';
+import Router from 'next/router'
 
 const backgroundColor = '#eee';
 import 'styles/styles.scss';
+
+// Init the Firebase app.
+initFirebase()
 
 class Post_part1 extends Component {
   constructor(){
@@ -12,48 +19,52 @@ class Post_part1 extends Component {
 
   render(){
     return(
-    <div>
-      <h1 class = "title">Ant Scholar Submission</h1>
-      <h2 class = "subtitle">Research Position Information</h2>      
-      <div class = "box">
-        <h3>Post Title*</h3>
-          <input
-            class = "input"          
-            type = "text"
-            placeholder = "e.g. HCI amongst Adolescents"
-            value = {this.props.title}
-            onChange={this.props.onChangeTitle}/>          
-          <h3>Area of Research*</h3>
-          <input
-            class = "input"          
-            type = "text"
-            placeholder = "e.g. Informatics - HCI"
-            value = {this.props.area_of_research}
-            onChange={this.props.onChangeAoR}/>          
-          <h3>Duration of the Research*</h3>
-          <input
-            class = "input"          
-            type = "text"
-            placeholder = "e.g. Spring 2020 - Summer 2020"
-            value = {this.props.len_or_duration}
-            onChange={this.props.onChangeLen}/>          
-          <h3>Perferred Majors*</h3>
-          <input
-            class = "input"          
-            type = "text"
-            placeholder = "Enter majors sepperated by commas"
-            value = {this.props.pref_majors}
-            onChange={this.props.onChangeMajor}/>    
-        <h3>Eligibility Requirements*</h3>
-          <input
-            class = "input"          
-            type = "text"
-            placeholder = "Enter majors sepperated by commas"
-            value = {this.props.eligibility_req}
-            onChange={this.props.onChangeReq}/>                            
-          <button class= "button" onClick = {this.props.goToNext}>Continue</button>
+      <div class="section">
+        <h1 class = "title has-text-centered">Ant Scholar Submission</h1>
+        <h2 class = "subtitle has-text-centered">Research Position Information</h2>    
+        <div class="columns is-centered">
+          <div class="column is-half">  
+          <div class = "box">
+            <h3>Post Title*</h3>
+              <input
+                class = "input"          
+                type = "text"
+                placeholder = "e.g. HCI amongst Adolescents"
+                value = {this.props.title}
+                onChange={this.props.onChangeTitle}/>          
+              <h3>Area of Research*</h3>
+              <input
+                class = "input"          
+                type = "text"
+                placeholder = "e.g. Informatics - HCI"
+                value = {this.props.area_of_research}
+                onChange={this.props.onChangeAoR}/>          
+              <h3>Duration of the Research*</h3>
+              <input
+                class = "input"          
+                type = "text"
+                placeholder = "e.g. Spring 2020 - Summer 2020"
+                value = {this.props.len_or_duration}
+                onChange={this.props.onChangeLen}/>          
+              <h3>Perferred Majors*</h3>
+              <input
+                class = "input"          
+                type = "text"
+                placeholder = "Enter majors sepperated by commas"
+                value = {this.props.pref_majors}
+                onChange={this.props.onChangeMajor}/>    
+            <h3>Eligibility Requirements*</h3>
+              <input
+                class = "input"          
+                type = "text"
+                placeholder = "Enter majors sepperated by commas"
+                value = {this.props.eligibility_req}
+                onChange={this.props.onChangeReq}/>                            
+              <button class= "button" onClick = {this.props.goToNext}>Continue</button>
+            </div>
+            </div>
+            </div>
         </div>
-      </div>
     );
   }
 }
@@ -66,9 +77,9 @@ class Post_part2 extends Component {
 
   render(){
     return(
-    <div>
-      <h1 class = "title">Ant Scholar Submission</h1>
-      <h2 class = "subtitle">Research Position Information</h2>      
+    <div class="container" style={{wdith: 770}}>
+      <h1 class = "title has-text-centered">Ant Scholar Submission</h1>
+      <h2 class = "subtitle has-text-centered">Research Position Information</h2>      
       <div class = "box">
           <h3>Number of Positions*</h3>
           <input
@@ -139,9 +150,36 @@ class PostForm extends Component{
       this.setState({step: step + 1});
     }
     else{
+      //const router = useRouter()
       alert("Submitted!");
-      //Area where submitting post details happens
+    
+      this.handleSubmit();
     }
+  }
+
+  async handleSubmit(e){
+    //e.preventDefault();
+    var newPostKey = firebase.database().ref().child('posts').push().key;
+    const db = firebase.database();
+
+    const ref = db.ref('post/' + newPostKey);
+
+    try {
+      await ref.set({
+        title: this.state.title,
+        num_of_positions: this.state.num_of_positions,
+        len_or_duration: this.state.len_or_duration,
+        area_of_research: this.state.area_of_research,
+        pref_majors: this.state.pref_majors,
+        eligibility_req: this.state.eligibility_req,
+        project_details: this.state.project_details
+      });
+    }
+    catch(error) {
+
+    }
+
+    Router.push("/posts/[post]", "/posts/" + newPostKey);
   }
 
   goToPrev() {
