@@ -18,7 +18,7 @@
         "cookie-session": "^1.4.0",
         "dotenv": "^8.2.0",
         "firebase": "^7.7.0",
-        "firebase-admin": "^8.9.2",
+        "firebase-admin": "^11.4.1",
         "isomorphic-unfetch": "^3.0.0",
         "lodash": "^4.17.15",
         "mobx": "^5.15.4",
